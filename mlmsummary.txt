@@ -1,0 +1,176 @@
+Linear mixed model fit by maximum likelihood  ['lmerMod']
+Formula: 
+scale(N5) ~ 1 + scale(BS) + condition * group * scale(x) * scale(y) *  
+    scale(z) + (1 + condition | subject_id) + (1 + condition |      scale_id)
+   Data: dat
+Control: bobyqa
+
+      AIC       BIC    logLik  deviance  df.resid 
+1020254.7 1020925.7 -510065.3 1020130.7    370576 
+
+Scaled residuals: 
+     Min       1Q   Median       3Q      Max 
+-10.7682  -0.5862   0.0002   0.5879  10.4437 
+
+Random effects:
+ Groups     Name                  Variance Std.Dev. Corr       
+ subject_id (Intercept)           0.031849 0.17846             
+            condition[S.aug4]     0.012076 0.10989   0.17      
+            condition[S.dominant] 0.007836 0.08852  -0.27 -0.30
+ scale_id   (Intercept)           0.003585 0.05987             
+            condition[S.aug4]     0.004420 0.06648  -0.09      
+            condition[S.dominant] 0.003424 0.05852  -0.13 -0.25
+ Residual                         0.915803 0.95698             
+Number of obs: 370638, groups:  subject_id, 49; scale_id, 24
+
+Fixed effects:
+                                                                      Estimate
+(Intercept)                                                          0.0301970
+scale(BS)                                                           -0.0072157
+condition[S.aug4]                                                   -0.0240324
+condition[S.dominant]                                               -0.0136464
+group[S.musicians]                                                   0.0942039
+scale(x)                                                             0.0234194
+scale(y)                                                            -0.1271078
+scale(z)                                                             0.0239138
+condition[S.aug4]:group[S.musicians]                                -0.0187608
+condition[S.dominant]:group[S.musicians]                            -0.0215476
+condition[S.aug4]:scale(x)                                           0.0056800
+condition[S.dominant]:scale(x)                                      -0.0053753
+group[S.musicians]:scale(x)                                          0.0013342
+condition[S.aug4]:scale(y)                                          -0.0088576
+condition[S.dominant]:scale(y)                                       0.0051185
+group[S.musicians]:scale(y)                                          0.0255865
+scale(x):scale(y)                                                   -0.0047921
+condition[S.aug4]:scale(z)                                          -0.0074023
+condition[S.dominant]:scale(z)                                      -0.0064328
+group[S.musicians]:scale(z)                                          0.0379190
+scale(x):scale(z)                                                    0.0008111
+scale(y):scale(z)                                                   -0.0256323
+condition[S.aug4]:group[S.musicians]:scale(x)                        0.0016835
+condition[S.dominant]:group[S.musicians]:scale(x)                   -0.0090038
+condition[S.aug4]:group[S.musicians]:scale(y)                       -0.0190318
+condition[S.dominant]:group[S.musicians]:scale(y)                    0.0042267
+condition[S.aug4]:scale(x):scale(y)                                  0.0035173
+condition[S.dominant]:scale(x):scale(y)                              0.0028240
+group[S.musicians]:scale(x):scale(y)                                 0.0025428
+condition[S.aug4]:group[S.musicians]:scale(z)                       -0.0062627
+condition[S.dominant]:group[S.musicians]:scale(z)                   -0.0121098
+condition[S.aug4]:scale(x):scale(z)                                  0.0025911
+condition[S.dominant]:scale(x):scale(z)                             -0.0009987
+group[S.musicians]:scale(x):scale(z)                                -0.0027849
+condition[S.aug4]:scale(y):scale(z)                                 -0.0007388
+condition[S.dominant]:scale(y):scale(z)                             -0.0043714
+group[S.musicians]:scale(y):scale(z)                                -0.0033848
+scale(x):scale(y):scale(z)                                          -0.0027635
+condition[S.aug4]:group[S.musicians]:scale(x):scale(y)               0.0073391
+condition[S.dominant]:group[S.musicians]:scale(x):scale(y)          -0.0021596
+condition[S.aug4]:group[S.musicians]:scale(x):scale(z)               0.0039982
+condition[S.dominant]:group[S.musicians]:scale(x):scale(z)          -0.0017082
+condition[S.aug4]:group[S.musicians]:scale(y):scale(z)              -0.0033820
+condition[S.dominant]:group[S.musicians]:scale(y):scale(z)          -0.0077638
+condition[S.aug4]:scale(x):scale(y):scale(z)                        -0.0023785
+condition[S.dominant]:scale(x):scale(y):scale(z)                     0.0025046
+group[S.musicians]:scale(x):scale(y):scale(z)                       -0.0009522
+condition[S.aug4]:group[S.musicians]:scale(x):scale(y):scale(z)     -0.0016746
+condition[S.dominant]:group[S.musicians]:scale(x):scale(y):scale(z)  0.0013807
+                                                                    Std. Error
+(Intercept)                                                          0.0291795
+scale(BS)                                                            0.0016193
+condition[S.aug4]                                                    0.0213300
+condition[S.dominant]                                                0.0179002
+group[S.musicians]                                                   0.0264968
+scale(x)                                                             0.0018583
+scale(y)                                                             0.0017423
+scale(z)                                                             0.0017523
+condition[S.aug4]:group[S.musicians]                                 0.0164562
+condition[S.dominant]:group[S.musicians]                             0.0133323
+condition[S.aug4]:scale(x)                                           0.0026177
+condition[S.dominant]:scale(x)                                       0.0026174
+group[S.musicians]:scale(x)                                          0.0018583
+condition[S.aug4]:scale(y)                                           0.0024419
+condition[S.dominant]:scale(y)                                       0.0024417
+group[S.musicians]:scale(y)                                          0.0017334
+scale(x):scale(y)                                                    0.0024622
+condition[S.aug4]:scale(z)                                           0.0024675
+condition[S.dominant]:scale(z)                                       0.0024675
+group[S.musicians]:scale(z)                                          0.0017530
+scale(x):scale(z)                                                    0.0020427
+scale(y):scale(z)                                                    0.0022533
+condition[S.aug4]:group[S.musicians]:scale(x)                        0.0026177
+condition[S.dominant]:group[S.musicians]:scale(x)                    0.0026174
+condition[S.aug4]:group[S.musicians]:scale(y)                        0.0024419
+condition[S.dominant]:group[S.musicians]:scale(y)                    0.0024417
+condition[S.aug4]:scale(x):scale(y)                                  0.0034692
+condition[S.dominant]:scale(x):scale(y)                              0.0034687
+group[S.musicians]:scale(x):scale(y)                                 0.0024622
+condition[S.aug4]:group[S.musicians]:scale(z)                        0.0024675
+condition[S.dominant]:group[S.musicians]:scale(z)                    0.0024675
+condition[S.aug4]:scale(x):scale(z)                                  0.0028767
+condition[S.dominant]:scale(x):scale(z)                              0.0028766
+group[S.musicians]:scale(x):scale(z)                                 0.0020427
+condition[S.aug4]:scale(y):scale(z)                                  0.0031718
+condition[S.dominant]:scale(y):scale(z)                              0.0031719
+group[S.musicians]:scale(y):scale(z)                                 0.0022530
+scale(x):scale(y):scale(z)                                           0.0031640
+condition[S.aug4]:group[S.musicians]:scale(x):scale(y)               0.0034692
+condition[S.dominant]:group[S.musicians]:scale(x):scale(y)           0.0034687
+condition[S.aug4]:group[S.musicians]:scale(x):scale(z)               0.0028767
+condition[S.dominant]:group[S.musicians]:scale(x):scale(z)           0.0028766
+condition[S.aug4]:group[S.musicians]:scale(y):scale(z)               0.0031718
+condition[S.dominant]:group[S.musicians]:scale(y):scale(z)           0.0031719
+condition[S.aug4]:scale(x):scale(y):scale(z)                         0.0044544
+condition[S.dominant]:scale(x):scale(y):scale(z)                     0.0044544
+group[S.musicians]:scale(x):scale(y):scale(z)                        0.0031640
+condition[S.aug4]:group[S.musicians]:scale(x):scale(y):scale(z)      0.0044544
+condition[S.dominant]:group[S.musicians]:scale(x):scale(y):scale(z)  0.0044544
+                                                                    t value
+(Intercept)                                                           1.035
+scale(BS)                                                            -4.456
+condition[S.aug4]                                                    -1.127
+condition[S.dominant]                                                -0.762
+group[S.musicians]                                                    3.555
+scale(x)                                                             12.603
+scale(y)                                                            -72.954
+scale(z)                                                             13.647
+condition[S.aug4]:group[S.musicians]                                 -1.140
+condition[S.dominant]:group[S.musicians]                             -1.616
+condition[S.aug4]:scale(x)                                            2.170
+condition[S.dominant]:scale(x)                                       -2.054
+group[S.musicians]:scale(x)                                           0.718
+condition[S.aug4]:scale(y)                                           -3.627
+condition[S.dominant]:scale(y)                                        2.096
+group[S.musicians]:scale(y)                                          14.760
+scale(x):scale(y)                                                    -1.946
+condition[S.aug4]:scale(z)                                           -3.000
+condition[S.dominant]:scale(z)                                       -2.607
+group[S.musicians]:scale(z)                                          21.631
+scale(x):scale(z)                                                     0.397
+scale(y):scale(z)                                                   -11.375
+condition[S.aug4]:group[S.musicians]:scale(x)                         0.643
+condition[S.dominant]:group[S.musicians]:scale(x)                    -3.440
+condition[S.aug4]:group[S.musicians]:scale(y)                        -7.794
+condition[S.dominant]:group[S.musicians]:scale(y)                     1.731
+condition[S.aug4]:scale(x):scale(y)                                   1.014
+condition[S.dominant]:scale(x):scale(y)                               0.814
+group[S.musicians]:scale(x):scale(y)                                  1.033
+condition[S.aug4]:group[S.musicians]:scale(z)                        -2.538
+condition[S.dominant]:group[S.musicians]:scale(z)                    -4.908
+condition[S.aug4]:scale(x):scale(z)                                   0.901
+condition[S.dominant]:scale(x):scale(z)                              -0.347
+group[S.musicians]:scale(x):scale(z)                                 -1.363
+condition[S.aug4]:scale(y):scale(z)                                  -0.233
+condition[S.dominant]:scale(y):scale(z)                              -1.378
+group[S.musicians]:scale(y):scale(z)                                 -1.502
+scale(x):scale(y):scale(z)                                           -0.873
+condition[S.aug4]:group[S.musicians]:scale(x):scale(y)                2.116
+condition[S.dominant]:group[S.musicians]:scale(x):scale(y)           -0.623
+condition[S.aug4]:group[S.musicians]:scale(x):scale(z)                1.390
+condition[S.dominant]:group[S.musicians]:scale(x):scale(z)           -0.594
+condition[S.aug4]:group[S.musicians]:scale(y):scale(z)               -1.066
+condition[S.dominant]:group[S.musicians]:scale(y):scale(z)           -2.448
+condition[S.aug4]:scale(x):scale(y):scale(z)                         -0.534
+condition[S.dominant]:scale(x):scale(y):scale(z)                      0.562
+group[S.musicians]:scale(x):scale(y):scale(z)                        -0.301
+condition[S.aug4]:group[S.musicians]:scale(x):scale(y):scale(z)      -0.376
+condition[S.dominant]:group[S.musicians]:scale(x):scale(y):scale(z)   0.310

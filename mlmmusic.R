@@ -37,24 +37,24 @@ capture.output(s, file = "mlmsummary.txt")
 
 sprintf("Number of fixed-effect correlations > 0.1: %d",sum(as.matrix(vcov(m)) > 0.1))
 
-jpeg('model.jpg')
+png('model.png')
 plot(m)
 dev.off()
 
-jpeg('qqplot.jpg')
+png('qqplot.png')
 qqmath(m)
 dev.off()
 
-jpeg('byitem.jpg')
+png('byitem.png')
 qqmath(ranef(m,condVar=TRUE))
 dev.off()
 
-jpeg('dotplot.jpg')
+png('dotplot.png')
 dotplot(ranef(m,condVar=TRUE))
 dev.off()
 
 #+ diagnostics, cache=TRUE, fig.width=10, fig.height=10
-jpeg('resvsfit.jpg')
+png('resvsfit.png')
 fortify.merMod(m, drop_na(dat)) %>%
   ggplot(aes(.fitted,.resid)) +
   geom_point(aes(color=condition),alpha=0.3) +
@@ -89,7 +89,7 @@ ci.gg <- ci %>%
   dplyr::filter(!str_detect(coef,"BS")) %>% # baseline terms
   mutate(topo=as.logical(str_detect(coef,"x|y|z")))
 
-jpeg('ggplot.jpg')
+png('ggplot.png')
 gg <- ggplot(mapping=aes(x=coef,y=est,ymin=`2.5 %`, ymax=`97.5 %`)) +
   geom_pointrange(fatten=1.5) +
   geom_hline(yintercept=0, linetype="dashed") +

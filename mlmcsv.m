@@ -6,13 +6,13 @@
     date : 12/01/2019
 %}
 
-excelDir  =    '/Users/francesco/Documents/MATLAB/MPI/MusicPrediction/mixedmodel';
+excelDir  =    '/Users/francesco/Documents/MATLAB/MPI/MusicPrediction/mlm_music';
 cd(excelDir)
 
 load('mlminputm.mat')
 load('mlminputnnm.mat')
 
-titles = {'scale_id','subject_id','group','condition','N5', 'BS', 'x', 'y', 'z'};
+titles = {'scale_id','subject_id','group','condition','N5', 'BS', 'x', 'y', 'z', 'channel', 'rating'};
 
 mlminput = vertcat(inputnnm, inputm);
 mlminput = sortrows(mlminput,2);

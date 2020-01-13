@@ -17,7 +17,7 @@ ft_defaults
 twin      =    [-0.50 1.0];
 rawDir    =    '/Users/francesco/Documents/MATLAB/MPI/MusicPrediction/RawNonMusicians';
 inputDir  =    '/Users/francesco/Documents/MATLAB/MPI/MusicPrediction/DataMusic/Data0.1-30NONMUSICIANS';
-excelDir  =    '/Users/francesco/Documents/MATLAB/MPI/MusicPrediction/mixedmodel';
+excelDir  =    '/Users/francesco/Documents/MATLAB/MPI/MusicPrediction/mlm_music';
 subjnum   =    31; % subject 6 and 24 were excluded
 
 for s = 1:subjnum
@@ -85,17 +85,20 @@ for s = 1:subjnum
     clear data_no_artifacts rawdata
     
     load('fran_59CH_elec.mat')
+    r = load('nonmusiciansrating.mat');
+    avgrating = r.nonmusicians;
     x  = num2cell(elec.pnt(:,1));
     y  = num2cell(elec.pnt(:,2));
     z  = num2cell(elec.pnt(:,3));
     ch = char(elec.label);
+    cellch = cellstr(ch);
     
     subj_id = num2cell(s);
     group   = {char('nonmusicians')};
     idx2    = horzcat(29:59, 1:28); 
     
     for t = 1:length(data.trial)
-        temp = cell(length(ch),9); 
+        temp = cell(length(ch),11); 
         for c = 1:length(ch)
             if s == 2
                 d = idx2(c);
@@ -106,13 +109,16 @@ for s = 1:subjnum
             bs = num2cell(mean(data.trial{t}(d,301:501),2)); % baseline window -250-0 ms
             if data.trialinfo(t,1) == 1
                 condition = {char('tonic')};
+                rating    = num2cell(avgrating(s,1));
             elseif data.trialinfo(t,1) == 2
                 condition = {char('dominant')};
+                rating    = num2cell(avgrating(s,2));
             else
                 condition = {char('aug4')};
+                rating    = num2cell(avgrating(s,3));
             end
             scale = num2cell(data.trialinfo(t,2));
-            temp(c,:) = [scale, subj_id, group, condition, n5, bs, x(d), y(d), z(d)];
+            temp(c,:) = [scale, subj_id, group, condition, n5, bs, x(d), y(d), z(d), cellch(c),rating];
          end
         if t == 1
             info = temp;

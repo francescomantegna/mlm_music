@@ -145,3 +145,46 @@ if(!knitting) dev.off()
 if(!knitting) png('coef_saggital.png')
 gg %+% subset(ci.gg, as.logical(str_detect(coef,"y"))) + ggtitle("Saggital Effects")
 if(!knitting) dev.off()
+
+roi <- c("F7", "F3", "Fz", "F4", "F8", "FT7", "FC3", "FC4", "FT8")
+
+ref_grid <- dat %>% dplyr::select(condition,x,y,z, channel) %>% unique()
+
+ref_grid_roi <- subset(ref_grid, channel %in% roi)
+
+# we need max x because that's symmetric lateral spread
+max_x <- max(ref_grid_roi$x)
+# we need max and min y that's saggital spread
+max_y <- max(ref_grid_roi$y)
+min_y <- min(ref_grid_roi$y)
+# we don't need to worry about max/min z because we get that for free
+
+dat_roi <- subset(dat, abs(x) <= max_x & y < max_y  & y > min_y)
+dat_roi$BS <- 0
+
+# re.form=~0 gets rid of the random effects, so that we're focused on the
+# estimated differences *at the population level*. Not that this also means
+# we're essentially doing marginalized fixed effect CIs and not prediction
+# intervals for future data
+set.seed(42)
+dat_roi$sim <- simulate(m, nsim=1000, newdata=dat_roi, re.form=~0)
+
+roi_effs <- dat_roi %>% group_by(condition, group) %>%
+  # colMeans marginalizes across electrodes in each ROI within each simulation
+  # so you then compute stats across simulations
+  summarize(mean=mean(colMeans(sim)),
+            lower=quantile(colMeans(sim),probs=0.085),
+            upper=quantile(colMeans(sim), probs=0.915))
+
+ggplot(roi_effs, aes(x=condition,
+                     color=group,fill=group,
+                     y=mean,
+                     ymin=lower, ymax=upper)) +
+  geom_pointrange(position=position_dodge(width=0.1)) +
+  labs(title="Estimated effects in frontal ROI for the N5 time window",
+       subtitle="with 83% confidence intervals",
+       y="µV",
+       x="Condition",
+       color="Group",
+       fill="Group") +
+  theme_light()

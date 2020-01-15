@@ -82,9 +82,10 @@ for s = 1:subjnum
     group = {char('musicians')};
     
     for t = 1:length(data.trial)
-        temp = cell(length(ch),11); 
+        temp = cell(length(ch),12); 
         for c = 1:length(ch)
-            n5 = num2cell(mean(data.trial{t}(c,476:551),2)); % N400 window 300-500 ms
+            n5 = num2cell(mean(data.trial{t}(c,476:551),2)); % N500 window 450-600 ms
+            p3 = num2cell(mean(data.trial{t}(c,351:401),2)); % P300 window 200-300 ms
             bs = num2cell(mean(data.trial{t}(c,151:251),2)); % baseline window -250-0 ms
             if data.trialinfo(t,1) == 1
                 condition = {char('tonic')};
@@ -97,7 +98,7 @@ for s = 1:subjnum
                 rating    = num2cell(avgrating(s,3));
             end
             scale = num2cell(data.trialinfo(t,2));
-              temp(c,:) = [scale, subj_id, group, condition, n5, bs, x(c), y(c), z(c), cellch(c), rating];
+              temp(c,:) = [scale, subj_id, group, condition, n5, p3, bs, x(c), y(c), z(c), cellch(c), rating];
         end
         if t == 1
             info = temp;

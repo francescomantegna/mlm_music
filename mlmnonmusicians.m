@@ -98,14 +98,15 @@ for s = 1:subjnum
     idx2    = horzcat(29:59, 1:28); 
     
     for t = 1:length(data.trial)
-        temp = cell(length(ch),11); 
+        temp = cell(length(ch),12); 
         for c = 1:length(ch)
             if s == 2
                 d = idx2(c);
             else
                 d = c;
             end
-            n5 = num2cell(mean(data.trial{t}(d,951:1101),2)); % N500 window 300-500 ms
+            n5 = num2cell(mean(data.trial{t}(d,951:1101),2)); % N500 window 450-600 ms
+            p3 = num2cell(mean(data.trial{t}(c,701:801),2)); % P300 window 200-300 ms
             bs = num2cell(mean(data.trial{t}(d,301:501),2)); % baseline window -250-0 ms
             if data.trialinfo(t,1) == 1
                 condition = {char('tonic')};
@@ -118,7 +119,7 @@ for s = 1:subjnum
                 rating    = num2cell(avgrating(s,3));
             end
             scale = num2cell(data.trialinfo(t,2));
-            temp(c,:) = [scale, subj_id, group, condition, n5, bs, x(d), y(d), z(d), cellch(c),rating];
+            temp(c,:) = [scale, subj_id, group, condition, n5, p3, bs, x(d), y(d), z(d), cellch(c),rating];
          end
         if t == 1
             info = temp;

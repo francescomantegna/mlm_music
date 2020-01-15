@@ -12,7 +12,7 @@ cd(excelDir)
 load('mlminputm.mat')
 load('mlminputnnm.mat')
 
-titles = {'scale_id','subject_id','group','condition','N5', 'BS', 'x', 'y', 'z', 'channel', 'rating'};
+titles = {'scale_id','subject_id','group','condition','N5', 'P3', 'BS', 'x', 'y', 'z', 'channel', 'rating'};
 
 mlminput = vertcat(inputnnm, inputm);
 mlminput = sortrows(mlminput,2);

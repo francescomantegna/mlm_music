@@ -104,11 +104,10 @@ fortify.merMod(m_n5, drop_na(dat)) %>%
        y="Residuals")
 if(!knitting) dev.off()
 
-#' For the ANOVA-style display, we can also omit the baseline interval because
-#' we don't actually care about it, even if we have to model it.
+#' For the ANOVA-style display, we focus on terms involving condition and group.
 #+ anova_n5, cache = TRUE, dependson="condition_model"
 kable(a <- Anova(m_n5))
-kable(a[!str_detect(rownames(a),"BS"),])
+kable(a[str_detect(rownames(a),"condition|group") & a$`Pr(>Chisq)` < 0.05,])
 capture.output(a, file = "ANOVA.txt")
 
 #' The above summary can also be expressed graphically.
@@ -253,11 +252,10 @@ fortify.merMod(m_p3, drop_na(dat)) %>%
        y="Residuals")
 if(!knitting) dev.off()
 
-#' For the ANOVA-style display, we can also omit the baseline interval because
-#' we don't actually care about it, even if we have to model it.
+#' For the ANOVA-style display, we focus on terms involving condition and group.
 #+ anova_p3, cache = TRUE, dependson="condition_model"
 kable(a <- Anova(m_p3))
-kable(a[!str_detect(rownames(a),"BS"),])
+kable(a[str_detect(rownames(a),"condition|group") & a$`Pr(>Chisq)` < 0.05,])
 capture.output(a, file = "ANOVA.txt")
 
 #' The above summary can also be expressed graphically.
@@ -408,11 +406,10 @@ fortify.merMod(m_n5_from_p3, drop_na(dat)) %>%
        y="Residuals")
 if(!knitting) dev.off()
 
-#' For the ANOVA-style display, we can also omit the baseline interval because
-#' we don't actually care about it, even if we have to model it.
+#' For the ANOVA-style display, we focus on terms involving condition and group.
 #+ anova_n5_from_p3, cache = TRUE, dependson="condition_model"
 kable(a <- Anova(m_n5_from_p3))
-kable(a[!str_detect(rownames(a),"BS"),])
+kable(a[str_detect(rownames(a),"condition|group") & a$`Pr(>Chisq)` < 0.05,])
 capture.output(a, file = "ANOVA.txt")
 
 #' The above summary can also be expressed graphically.

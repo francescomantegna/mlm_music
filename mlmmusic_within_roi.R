@@ -67,6 +67,8 @@ system.time(m_n5 <- lmer(N5 ~ 1 + BS + condition * group  +
                          REML=FALSE))
 
 print(summary(m_n5),correlation=FALSE,symbolic.cor=TRUE)
+print(summary(rePCA(m_n5)))
+print(vif(m_n5))
 
 s <- summary(m_n5)
 capture.output(s, file = "mlmsummary_roi.txt")
@@ -121,7 +123,19 @@ system.time(m_p3 <- lmer(P3 ~ 1 + BS + condition * group +
                          control=bobyqa,
                          REML=FALSE))
 
+print(summary(rePCA(m_p3)))
+#' Okay, we need to redo the RE
+system.time(m_p3 <- lmer(P3 ~ 1 + BS + condition * group +
+                             (1 + condition | subject_id) +
+                             (1  | scale_id),
+                         data=dat_roi,
+                         control=bobyqa,
+                         REML=FALSE))
+
 print(summary(m_p3),correlation=FALSE,symbolic.cor=TRUE)
+print(summary(rePCA(m_p3)))
+print(vif(m_p3))
+
 
 s <- summary(m_p3)
 capture.output(s, file = "mlmsummary.txt")
@@ -174,6 +188,8 @@ system.time(m_n5_from_p3_additive <- lmer(N5 ~ 1 + BS + P3 + condition * group +
                                           data=dat_roi,
                                           control=bobyqa,
                                           REML=FALSE))
+print(summary(rePCA(m_n5_from_p3_additive)))
+print(vif(m_n5_from_p3_additive))
 
 system.time(m_n5_from_p3_bycond <- lmer(N5 ~ 1 + BS + P3 * condition * group +
                                             (1 + condition | subject_id) +
@@ -182,6 +198,9 @@ system.time(m_n5_from_p3_bycond <- lmer(N5 ~ 1 + BS + P3 * condition * group +
                                         control=bobyqa,
                                         start=getME(m_n5_from_p3_additive,"theta"),
                                         REML=FALSE))
+
+print(summary(rePCA(m_n5_from_p3_bycond)))
+print(vif(m_n5_from_p3_bycond))
 
 anova(m_n5, m_n5_from_p3_additive, m_n5_from_p3_bycond)
 

@@ -29,8 +29,8 @@ dat <- read_csv(here("mlm_inputmusic.csv"))
 dat$condition <- factor(dat$condition)
 
 
-#' This sets the contrasts for condition as `aug4 < dominant < tonic`
-contrasts(dat$condition) <- contr.sdif(c("aug4","dominant","tonic"))
+#' This sets the contrasts for condition as `aug4 < dominant` and `mean(aug4, dominant) < tonic`
+contrasts(dat$condition) <- contr.Helmert(c("aug4","dominant","tonic"))
 
 #' We omit the multicollinearity check because we have an orthogonal design.
 

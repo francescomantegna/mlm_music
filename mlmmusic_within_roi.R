@@ -27,9 +27,9 @@ dat$condition <- factor(dat$condition)
 #' This sets the contrasts for condition as `aug4 < dominant` and `mean(aug4, dominant) < tonic`
 ch <- contr.Helmert(c("aug4","dominant","tonic"))
 print(ch)
-colnames(ch) <- c("dominant>aug4", "tonic>mean(dominant,aug4)")
+colnames(ch) <- c("[dom > aug4]", "[tonic > mean(dom,aug4)]")
 contrasts(dat$condition) <- ch
-print(ch)
+print(contrasts(dat$condition))
 
 #' We restrict further analysis to the ROI seen in studies by Koelsch and colleagues
 
@@ -48,6 +48,10 @@ dat_roi <- subset(dat, abs(x) <= max_x & y < max_y  & y > min_y)
 dat_roi <- dat_roi %>%
     group_by(condition, group, subject_id, scale_id) %>%
     summarize_at(vars(N5, P3, BS), mean)
+
+contrasts(dat_roi$condition) <- ch
+print(contrasts(dat_roi$condition))
+
 
 #' We omit the multicollinearity check because we have an orthogonal design.
 

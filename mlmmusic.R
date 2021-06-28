@@ -31,9 +31,9 @@ dat$condition <- factor(dat$condition)
 #' This sets the contrasts for condition as `aug4 < dominant` and `mean(aug4, dominant) < tonic`
 ch <- contr.Helmert(c("aug4","dominant","tonic"))
 print(ch)
-colnames(ch) <- c("dominant>aug4", "tonic>mean(dominant,aug4)")
+colnames(ch) <- c("[dom > aug4]", "[tonic > mean(dom,aug4)]")
 contrasts(dat$condition) <- ch
-print(ch)
+print(contrasts(dat$condition))
 
 #' We omit the multicollinearity check because we have an orthogonal design.
 

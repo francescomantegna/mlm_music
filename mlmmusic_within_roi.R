@@ -1,9 +1,9 @@
 #'---
-#'title: Prediction in Music
+#'title: "Prediction in Music: Averaging within ROI"
 #'author:
 #' - Phillip M. Alday
 #' - Francesco Mantegna
-#'date: January 2020
+#'date: "June 2021 (from commit: `r system('git rev-parse --short HEAD', intern = TRUE)`)"
 #'---
 
 library("here")

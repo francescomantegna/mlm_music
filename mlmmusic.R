@@ -1,9 +1,9 @@
 #'---
-#'title: Prediction in Music
+#'title: "Prediction in Music: Continuous Topography"
 #'author:
 #' - Francesco Mantegna
 #' - Phillip M. Alday
-#'date: January 2020
+#'date: "June 2021 (from commit: `r system('git rev-parse --short HEAD', intern = TRUE)`)"
 #'---
 
 library("here")

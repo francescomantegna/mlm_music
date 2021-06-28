@@ -25,7 +25,11 @@ dat <- read_csv(here("mlm_inputmusic.csv"))
 dat$condition <- factor(dat$condition)
 
 #' This sets the contrasts for condition as `aug4 < dominant` and `mean(aug4, dominant) < tonic`
-contrasts(dat$condition) <- contr.Helmert(c("aug4","dominant","tonic"))
+ch <- contr.Helmert(c("aug4","dominant","tonic"))
+print(ch)
+colnames(ch) <- c("dominant>aug4", "tonic>mean(dominant,aug4)")
+contrasts(dat$condition) <- ch
+print(ch)
 
 #' We restrict further analysis to the ROI seen in studies by Koelsch and colleagues
 

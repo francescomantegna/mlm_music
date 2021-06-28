@@ -1,9 +1,9 @@
 #'---
-#'title: Prediction in Music
+#'title: "Prediction in Music: Continuous Topography"
 #'author:
 #' - Francesco Mantegna
 #' - Phillip M. Alday
-#'date: January 2020
+#'date: "June 2021 (from commit: `r system('git rev-parse --short HEAD', intern = TRUE)`)"
 #'---
 
 library("here")
@@ -28,9 +28,12 @@ dat <- read_csv(here("mlm_inputmusic.csv"))
 
 dat$condition <- factor(dat$condition)
 
-
-#' This sets the contrasts for condition as `aug4 < dominant < tonic`
-contrasts(dat$condition) <- contr.sdif(c("aug4","dominant","tonic"))
+#' This sets the contrasts for condition as `aug4 < dominant` and `mean(aug4, dominant) < tonic`
+ch <- contr.Helmert(c("aug4","dominant","tonic"))
+print(ch)
+colnames(ch) <- c("[dom > aug4]", "[tonic > mean(dom,aug4)]")
+contrasts(dat$condition) <- ch
+print(contrasts(dat$condition))
 
 #' We omit the multicollinearity check because we have an orthogonal design.
 

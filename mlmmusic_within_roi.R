@@ -1,9 +1,9 @@
 #'---
-#'title: Prediction in Music
+#'title: "Prediction in Music: Averaging within ROI"
 #'author:
 #' - Phillip M. Alday
 #' - Francesco Mantegna
-#'date: January 2020
+#'date: "June 2021 (from commit: `r system('git rev-parse --short HEAD', intern = TRUE)`)"
 #'---
 
 library("here")
@@ -24,8 +24,12 @@ knitting <- is_html_output() || is_latex_output()
 dat <- read_csv(here("mlm_inputmusic.csv"))
 dat$condition <- factor(dat$condition)
 
-#' This sets the contrasts for condition as `aug4 < dominant < tonic`
-contrasts(dat$condition) <- contr.sdif(c("aug4","dominant","tonic"))
+#' This sets the contrasts for condition as `aug4 < dominant` and `mean(aug4, dominant) < tonic`
+ch <- contr.Helmert(c("aug4","dominant","tonic"))
+print(ch)
+colnames(ch) <- c("[dom > aug4]", "[tonic > mean(dom,aug4)]")
+contrasts(dat$condition) <- ch
+print(contrasts(dat$condition))
 
 #' We restrict further analysis to the ROI seen in studies by Koelsch and colleagues
 
@@ -44,6 +48,10 @@ dat_roi <- subset(dat, abs(x) <= max_x & y < max_y  & y > min_y)
 dat_roi <- dat_roi %>%
     group_by(condition, group, subject_id, scale_id) %>%
     summarize_at(vars(N5, P3, BS), mean)
+
+contrasts(dat_roi$condition) <- ch
+print(contrasts(dat_roi$condition))
+
 
 #' We omit the multicollinearity check because we have an orthogonal design.
 

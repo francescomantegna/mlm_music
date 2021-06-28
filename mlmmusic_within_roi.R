@@ -89,9 +89,9 @@ kable(a[str_detect(rownames(a),"condition|group") & a$`Pr(>Chisq)` < 0.05,])
 
 # Wald is the fastest method; boot the most accurate and slowest, profile is a
 # the middle road
-# ci <- confint(m_n5,method="Wald")
-prof <- profile(m_n5, parallel="snow", ncpus=4,devtol = 1e-06)
-ci <- confint(prof)
+ci <- confint(m_n5,method="Wald")
+# prof <- profile(m_n5, parallel="snow", ncpus=4, devtol=1e-06)
+# ci <- confint(prof)
 
 #+ coefplot_n5, cache=TRUE, fig.width=7, fig.height=5
 ci.gg <- ci %>%
@@ -156,9 +156,9 @@ kable(a[str_detect(rownames(a),"condition|group") & a$`Pr(>Chisq)` < 0.05,])
 
 # Wald is the fastest method; boot the most accurate and slowest, profile is a
 # the middle road
-# ci <- confint(m_p3,method="Wald")
-prof <- profile(m_p3, parallel="snow", ncpus=4)
-ci <- confint(prof)
+ci <- confint(m_p3, method="Wald")
+# prof <- profile(m_p3, parallel="snow", ncpus=4)
+# ci <- confint(prof)
 
 #+ coefplot_p3, cache=TRUE, fig.width=7, fig.height=5
 ci.gg <- ci %>%
@@ -226,9 +226,9 @@ kable(a[str_detect(rownames(a),"condition|group") & a$`Pr(>Chisq)` < 0.05,])
 
 # Wald is the fastest method; boot the most accurate and slowest, profile is a
 # the middle road
-# ci <- confint(m_n5_from_p3,method="Wald")
-prof <- profile(m_n5_from_p3, parallel="snow", ncpus=4)
-ci <- confint(prof)
+ci <- confint(m_n5_from_p3,method="Wald")
+# prof <- profile(m_n5_from_p3, parallel="snow", ncpus=4)
+# ci <- confint(prof)
 
 #+ coefplot_n5_from_p3, cache=TRUE, fig.width=7, fig.height=5
 ci.gg <- ci %>%
